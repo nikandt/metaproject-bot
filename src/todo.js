@@ -1,34 +1,34 @@
-import { readFile } from 'fs/promises';
-import { existsSync } from 'fs';
-import path from 'path';
-
-const base = process.env.METAPROJECT_PATH ?? '.';
-
-const PROJECT_TODO_PATHS = {
-  root:            'TODO.md',
-  omamaya:         'projects/omamaya/TODO.md',
-  pinot:           'projects/pinot/TODO.md',
-  'pinot-server':  'projects/pinot/pinot-server/TODO.md',
-  'pinot-client':  'projects/pinot/pinot-client/TODO.md',
-  portfolio:       'projects/portfolio/TODO.md',
-  slnd:            'projects/SLND/TODO.md',
-  kitsat:          'projects/SLND/kitsat/TODO.md',
-  cansat:          'projects/SLND/cansat-next/TODO.md',
-  mydoo:           'projects/SLND/MyDoo/TODO.md',
+// Each entry: [owner, repo, path-in-repo]
+const SOURCES = {
+  root:           ['nikandt', 'metaproject',     'TODO.md'],
+  omamaya:        ['nikandt', 'metaproject',     'projects/omamaya/TODO.md'],
+  pinot:          ['nikandt', 'metaproject',     'projects/pinot/TODO.md'],
+  'pinot-server': ['nikandt', 'pinot-server',    'TODO.md'],
+  'pinot-client': ['nikandt', 'pinot-client',    'TODO.md'],
+  portfolio:      ['nikandt', 'metaproject',     'projects/portfolio/TODO.md'],
+  slnd:           ['nikandt', 'metaproject',     'projects/SLND/TODO.md'],
+  kitsat:         ['nikandt', 'metaproject',     'projects/SLND/kitsat/TODO.md'],
+  cansat:         ['nikandt', 'cansat-next',     'TODO.md'],
+  mydoo:          ['nikandt', 'metaproject',     'projects/SLND/MyDoo/TODO.md'],
 };
 
 export async function getTodo(project) {
   const key = project?.toLowerCase() ?? 'root';
-  const rel = PROJECT_TODO_PATHS[key];
+  const source = SOURCES[key];
 
-  if (!rel) {
-    const available = Object.keys(PROJECT_TODO_PATHS).join(', ');
-    return `Unknown project. Available: ${available}`;
+  if (!source) {
+    return `Unknown project. Available: ${Object.keys(SOURCES).join(', ')}`;
   }
 
-  const filePath = path.join(base, rel);
-  if (!existsSync(filePath)) return `TODO not found at ${rel}`;
+  const [owner, repo, filePath] = source;
+  const url = `https://raw.githubusercontent.com/${owner}/${repo}/master/${filePath}`;
 
-  const content = await readFile(filePath, 'utf8');
-  return content.length > 3800 ? content.slice(0, 3800) + '\n\n…(truncated)' : content;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return `Could not fetch TODO (${res.status}): ${url}`;
+    const content = await res.text();
+    return content.length > 3800 ? content.slice(0, 3800) + '\n\n…(truncated)' : content;
+  } catch (e) {
+    return `Error fetching TODO: ${e.message}`;
+  }
 }

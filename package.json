@@ -1,0 +1,19 @@
+{
+  "name": "metaproject-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for metaproject repository access via Claude API",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "telegraf": "^4.16.3",
+    "@anthropic-ai/sdk": "^0.40.0",
+    "simple-git": "^3.27.0"
+  },
+  "engines": {
+    "node": ">=20.x"
+  }
+}

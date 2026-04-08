@@ -1,15 +1,15 @@
-// Each entry: [owner, repo, path-in-repo]
+// Each entry: [owner, repo, branch, path-in-repo]
 const SOURCES = {
-  root:           ['nikandt', 'metaproject',     'TODO.md'],
-  omamaya:        ['nikandt', 'metaproject',     'projects/omamaya/TODO.md'],
-  pinot:          ['nikandt', 'metaproject',     'projects/pinot/TODO.md'],
-  'pinot-server': ['nikandt', 'pinot-server',    'TODO.md'],
-  'pinot-client': ['nikandt', 'pinot-client',    'TODO.md'],
-  portfolio:      ['nikandt', 'metaproject',     'projects/portfolio/TODO.md'],
-  slnd:           ['nikandt', 'metaproject',     'projects/SLND/TODO.md'],
-  kitsat:         ['nikandt', 'metaproject',     'projects/SLND/kitsat/TODO.md'],
-  cansat:         ['nikandt', 'cansat-next',     'TODO.md'],
-  mydoo:          ['nikandt', 'metaproject',     'projects/SLND/MyDoo/TODO.md'],
+  root:           ['nikandt', 'metaproject',  'master', 'TODO.md'],
+  omamaya:        ['nikandt', 'metaproject',  'master', 'projects/omamaya/TODO.md'],
+  pinot:          ['nikandt', 'metaproject',  'master', 'projects/pinot/TODO.md'],
+  'pinot-server': ['nikandt', 'pinot-server', 'master', 'TODO.md'],
+  'pinot-client': ['nikandt', 'pinot-client', 'main',   'TODO.md'],
+  portfolio:      ['nikandt', 'metaproject',  'master', 'projects/portfolio/TODO.md'],
+  slnd:           ['nikandt', 'metaproject',  'master', 'projects/SLND/TODO.md'],
+  kitsat:         ['nikandt', 'metaproject',  'master', 'projects/SLND/kitsat/TODO.md'],
+  cansat:         ['nikandt', 'cansat-next',  'main',   'TODO.md'],
+  mydoo:          ['nikandt', 'metaproject',  'master', 'projects/SLND/MyDoo/TODO.md'],
 };
 
 export async function getTodo(project) {
@@ -20,8 +20,8 @@ export async function getTodo(project) {
     return `Unknown project. Available: ${Object.keys(SOURCES).join(', ')}`;
   }
 
-  const [owner, repo, filePath] = source;
-  const url = `https://raw.githubusercontent.com/${owner}/${repo}/master/${filePath}`;
+  const [owner, repo, branch, filePath] = source;
+  const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filePath}`;
 
   try {
     const res = await fetch(url);

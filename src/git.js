@@ -1,40 +1,38 @@
-import simpleGit from 'simple-git';
-import { existsSync } from 'fs';
+const OWNER = 'nikandt';
+const REPO  = 'metaproject';
 
-const repoPath = process.env.METAPROJECT_PATH;
-
-function getGit() {
-  if (!repoPath) return null;
-  // Normalize: strip surrounding quotes that some .env parsers leave in
-  const p = repoPath.replace(/^['"]|['"]$/g, '');
-  if (!existsSync(p)) return null;
-  return simpleGit(p);
+function ghHeaders() {
+  const h = { Accept: 'application/vnd.github+json' };
+  if (process.env.GITHUB_TOKEN) h.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  return h;
 }
 
 export async function gitLog(n = 5) {
-  const git = getGit();
-  if (!git) return `METAPROJECT_PATH not set or not found (got: ${repoPath ?? 'undefined'})`;
   try {
-    const log = await git.log(['--oneline', `-${n}`]);
-    if (!log.all.length) return 'No commits found.';
-    return log.all.map(c => `${c.hash.slice(0, 7)} ${c.message}`).join('\n');
+    const res = await fetch(
+      `https://api.github.com/repos/${OWNER}/${REPO}/commits?per_page=${n}`,
+      { headers: ghHeaders() }
+    );
+    if (!res.ok) return `GitHub API error: ${res.status}`;
+    const commits = await res.json();
+    return commits
+      .map(c => `${c.sha.slice(0, 7)} ${c.commit.message.split('\n')[0]}`)
+      .join('\n');
   } catch (e) {
     return `Error: ${e.message}`;
   }
 }
 
 export async function gitStatus() {
-  const git = getGit();
-  if (!git) return `METAPROJECT_PATH not set or not found (got: ${repoPath ?? 'undefined'})`;
   try {
-    const status = await git.status();
-    const lines = [];
-    if (status.current) lines.push(`Branch: ${status.current}`);
-    if (status.modified.length) lines.push(`Modified: ${status.modified.join(', ')}`);
-    if (status.not_added.length) lines.push(`Untracked: ${status.not_added.join(', ')}`);
-    if (status.staged.length) lines.push(`Staged: ${status.staged.join(', ')}`);
-    if (lines.length === 1) lines.push('Working tree clean');
-    return lines.join('\n');
+    const res = await fetch(
+      `https://api.github.com/repos/${OWNER}/${REPO}/commits?per_page=1`,
+      { headers: ghHeaders() }
+    );
+    if (!res.ok) return `GitHub API error: ${res.status}`;
+    const [latest] = await res.json();
+    const date = new Date(latest.commit.author.date).toLocaleString('fi-FI', { timeZone: 'Europe/Helsinki' });
+    return `${OWNER}/${REPO}\nLatest commit: ${latest.sha.slice(0, 7)} ${latest.commit.message.split('\n')[0]}\nBy: ${latest.commit.author.name} @ ${date}`;
   } catch (e) {
     return `Error: ${e.message}`;
   }

@@ -6,7 +6,7 @@ Telegram bot for accessing the metaproject codebase from mobile. Powered by Tele
 
 | Command | Description |
 |---------|-------------|
-| `/todo [project]` | Show TODO.md for a project (`root`, `omamaya`, `pinot`, `pinot-server`, `pinot-client`, `portfolio`, `slnd`, `kitsat`, `cansat`, `mydoo`) |
+| `/todo [project]` | Show TODO.md for a project (`root`, `subproject`) |
 | `/log [n]` | Last n git commits (default 5) |
 | `/status` | Git status of the metaproject repo |
 | `/ask <question>` | Ask Claude a question about the codebase |

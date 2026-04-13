@@ -4,6 +4,7 @@ import { gitLog, gitStatus } from './git.js';
 import { getTodo } from './todo.js';
 import { handleChat, clearHistory } from './chat.js';
 import { startWatcher } from './watcher.js';
+import { createIssue } from './issues.js';
 import { log, warn, error } from './logger.js';
 
 // Config validation
@@ -43,13 +44,14 @@ bot.use((ctx, next) => {
 
 const HELP_TEXT =
   'metaproject bot\n\n' +
-  '/todo [project] — show TODO\n' +
-  '/log [n]        — recent commits\n' +
-  '/status         — git status\n' +
-  '/ask <question> — ask Claude about the codebase\n' +
-  '/clear          — clear chat history\n' +
-  '/help           — show this message\n' +
-  'anything else   — chat with gpt-4o-mini';
+  '/todo [project]        — show TODO\n' +
+  '/log [n]               — recent commits\n' +
+  '/status                — git status\n' +
+  '/issue <title> [| body] — create GitHub issue\n' +
+  '/ask <question>        — ask Claude about the codebase\n' +
+  '/clear                 — clear chat history\n' +
+  '/help                  — show this message\n' +
+  'anything else          — chat with gpt-4o-mini';
 
 bot.start((ctx) => ctx.reply(HELP_TEXT));
 bot.help((ctx) => ctx.reply(HELP_TEXT));
@@ -73,6 +75,16 @@ bot.command('log', async (ctx) => {
 bot.command('status', async (ctx) => {
   log(`/status from ${ctx.from.id}`);
   const result = await gitStatus();
+  await ctx.reply(result);
+});
+
+bot.command('issue', async (ctx) => {
+  const input = ctx.message.text.split(' ').slice(1).join(' ').trim();
+  if (!input) return ctx.reply('Usage: /issue <title> [| body]');
+  const [title, ...rest] = input.split('|');
+  const body = rest.join('|').trim();
+  log(`/issue from ${ctx.from.id}: ${title.trim()}`);
+  const result = await createIssue(title.trim(), body);
   await ctx.reply(result);
 });
 

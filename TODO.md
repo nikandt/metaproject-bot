@@ -39,7 +39,7 @@
 
 - [ ] Add support for code search across repositories
 - [x] Watch master branch and notify on new commits
-- [ ] Support issue creation through chat (MyDoo is capable of that — see ../MyDoo)
+- [x] Support issue creation through chat (GitHub issues on metaproject)
 - [ ] Implement issue tracking integration
 - [ ] Add support for pull request notifications
 - [ ] Implement repository statistics and metrics

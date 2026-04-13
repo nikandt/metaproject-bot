@@ -5,6 +5,7 @@ import { getTodo } from './todo.js';
 import { handleChat, clearHistory } from './chat.js';
 import { startWatcher } from './watcher.js';
 import { createIssue } from './issues.js';
+import { startWatchdog } from './healthcheck.js';
 import { log, warn, error } from './logger.js';
 
 // Config validation
@@ -114,6 +115,7 @@ bot.launch();
 log('Bot running');
 
 startWatcher(bot, allowedUserId);
+startWatchdog();
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));

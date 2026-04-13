@@ -14,7 +14,7 @@
 - [x] Implement pagination for long TODO files (>3800 chars)
 - [x] Add /help command with detailed usage instructions
 - [ ] Add version command to show bot version
-- [ ] Implement health check endpoint for monitoring
+- [x] Implement health check endpoint for monitoring (systemd watchdog, to be replaced by Zabbix)
 
 ## Low Priority
 

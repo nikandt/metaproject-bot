@@ -2,16 +2,16 @@
 
 ## High Priority
 
-- [ ] Add error handling for rate limiting from GitHub API
+- [x] Add error handling for rate limiting from GitHub API
 - [ ] Implement caching for TODO.md files to reduce API calls
 - [ ] Add authentication for multiple allowed users instead of single ALLOWED_USER_ID
-- [ ] Add logging for bot activity and errors
-- [ ] Implement proper configuration validation on startup
+- [x] Add logging for bot activity and errors
+- [x] Implement proper configuration validation on startup
 
 ## Medium Priority
 
 - [ ] Add support for more projects in the TODO command
-- [ ] Implement pagination for long TODO files (>3800 chars)
+- [x] Implement pagination for long TODO files (>3800 chars)
 - [x] Add /help command with detailed usage instructions
 - [ ] Add version command to show bot version
 - [ ] Implement health check endpoint for monitoring
@@ -38,7 +38,7 @@
 ## Future Features
 
 - [ ] Add support for code search across repositories
-- [ ] Watch master branch and notify on new commits
+- [x] Watch master branch and notify on new commits
 - [ ] Support issue creation through chat (MyDoo is capable of that — see ../MyDoo)
 - [ ] Implement issue tracking integration
 - [ ] Add support for pull request notifications

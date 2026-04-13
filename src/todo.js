@@ -30,8 +30,7 @@ export async function getTodo(project) {
   try {
     const res = await fetch(url, { headers });
     if (!res.ok) return `Could not fetch TODO (${res.status}): ${url}`;
-    const content = await res.text();
-    return content.length > 3800 ? content.slice(0, 3800) + '\n\n…(truncated)' : content;
+    return await res.text();
   } catch (e) {
     return `Error fetching TODO: ${e.message}`;
   }

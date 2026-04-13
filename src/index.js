@@ -3,14 +3,37 @@ import { handleAsk } from './ask.js';
 import { gitLog, gitStatus } from './git.js';
 import { getTodo } from './todo.js';
 import { handleChat, clearHistory } from './chat.js';
+import { startWatcher } from './watcher.js';
+import { log, warn, error } from './logger.js';
+
+// Config validation
+const REQUIRED = ['TELEGRAM_TOKEN', 'ALLOWED_USER_ID'];
+const OPTIONAL = ['ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'GITHUB_TOKEN'];
+
+for (const key of REQUIRED) {
+  if (!process.env[key]) throw new Error(`Missing required env var: ${key}`);
+}
+for (const key of OPTIONAL) {
+  if (!process.env[key]) warn(`${key} not set — related features will be unavailable`);
+}
 
 const token = process.env.TELEGRAM_TOKEN;
-const allowedUserId = parseInt(process.env.ALLOWED_USER_ID ?? '0', 10);
-
-if (!token) throw new Error('TELEGRAM_TOKEN is required');
-if (!allowedUserId) throw new Error('ALLOWED_USER_ID is required');
+const allowedUserId = parseInt(process.env.ALLOWED_USER_ID, 10);
 
 const bot = new Telegraf(token);
+
+// Pagination — splits text into ≤4096-char chunks on newline boundaries
+function paginate(text, limit = 4096) {
+  const pages = [];
+  while (text.length > limit) {
+    let split = text.lastIndexOf('\n', limit);
+    if (split === -1) split = limit;
+    pages.push(text.slice(0, split));
+    text = text.slice(split + 1);
+  }
+  if (text) pages.push(text);
+  return pages;
+}
 
 // Auth guard — only respond to the configured user
 bot.use((ctx, next) => {
@@ -33,17 +56,22 @@ bot.help((ctx) => ctx.reply(HELP_TEXT));
 
 bot.command('todo', async (ctx) => {
   const project = ctx.message.text.split(' ').slice(1).join(' ').trim() || null;
+  log(`/todo ${project ?? 'root'} from ${ctx.from.id}`);
   const result = await getTodo(project);
-  await ctx.reply(result, { parse_mode: 'Markdown' });
+  for (const page of paginate(result)) {
+    await ctx.reply(page, { parse_mode: 'Markdown' });
+  }
 });
 
 bot.command('log', async (ctx) => {
   const n = parseInt(ctx.message.text.split(' ')[1] ?? '5', 10);
+  log(`/log ${n} from ${ctx.from.id}`);
   const result = await gitLog(isNaN(n) ? 5 : n);
   await ctx.reply(result);
 });
 
 bot.command('status', async (ctx) => {
+  log(`/status from ${ctx.from.id}`);
   const result = await gitStatus();
   await ctx.reply(result);
 });
@@ -51,20 +79,29 @@ bot.command('status', async (ctx) => {
 bot.command('ask', async (ctx) => {
   const question = ctx.message.text.split(' ').slice(1).join(' ').trim();
   if (!question) return ctx.reply('Usage: /ask <question>');
+  log(`/ask from ${ctx.from.id}: ${question}`);
   await ctx.reply('Thinking...');
   const result = await handleAsk(question);
-  await ctx.reply(result);
+  for (const page of paginate(result)) {
+    await ctx.reply(page);
+  }
 });
 
-bot.command('clear', (ctx) => ctx.reply(clearHistory()));
+bot.command('clear', (ctx) => {
+  log(`/clear from ${ctx.from.id}`);
+  ctx.reply(clearHistory());
+});
 
 bot.on('text', async (ctx) => {
+  log(`chat from ${ctx.from.id}: ${ctx.message.text.slice(0, 60)}`);
   const reply = await handleChat(ctx.message.text);
   await ctx.reply(reply);
 });
 
 bot.launch();
-console.log('Bot running');
+log('Bot running');
+
+startWatcher(bot, allowedUserId);
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));

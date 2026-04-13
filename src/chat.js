@@ -14,7 +14,7 @@ export async function handleChat(text) {
     const response = await client.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
-        { role: 'system', content: 'You are a casual, no-nonsense assistant. Keep replies short.' },
+        { role: 'system', content: `You are a sharp personal assistant for a solo developer. Be concise — short sentences, no filler. Respond in the same language as the user. Today: ${new Date().toISOString().split('T')[0]}` },
         ...history,
       ],
       temperature: 0.8,

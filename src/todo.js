@@ -23,8 +23,12 @@ export async function getTodo(project) {
   const [owner, repo, branch, filePath] = source;
   const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filePath}`;
 
+  const headers = process.env.GITHUB_TOKEN
+    ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+    : {};
+
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { headers });
     if (!res.ok) return `Could not fetch TODO (${res.status}): ${url}`;
     const content = await res.text();
     return content.length > 3800 ? content.slice(0, 3800) + '\n\n…(truncated)' : content;

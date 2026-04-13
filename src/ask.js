@@ -14,8 +14,11 @@ const CONTEXT_FILES = [
 async function loadContext() {
   const parts = await Promise.all(CONTEXT_FILES.map(async ([owner, repo, filePath]) => {
     const url = `https://raw.githubusercontent.com/${owner}/${repo}/master/${filePath}`;
+    const headers = process.env.GITHUB_TOKEN
+      ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+      : {};
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { headers });
       if (!res.ok) return null;
       return `### ${filePath}\n${await res.text()}`;
     } catch { return null; }

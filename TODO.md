@@ -1,10 +1,5 @@
 # metaproject-bot TODO
 
-## Blocked
-
-- [ ] Top up Anthropic credits (console.anthropic.com → Billing) — needed for /ask
-- [ ] Top up OpenAI credits (platform.openai.com → Billing) — needed for chat and /ask fallback
-
 ## High Priority
 
 - [ ] Add error handling for rate limiting from GitHub API

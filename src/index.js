@@ -2,6 +2,7 @@ import { Telegraf } from 'telegraf';
 import { handleAsk } from './ask.js';
 import { gitLog, gitStatus } from './git.js';
 import { getTodo } from './todo.js';
+import { handleChat, clearHistory } from './chat.js';
 
 const token = process.env.TELEGRAM_TOKEN;
 const allowedUserId = parseInt(process.env.ALLOWED_USER_ID ?? '0', 10);
@@ -22,7 +23,9 @@ bot.start((ctx) => ctx.reply(
   '/todo [project] — show TODO\n' +
   '/log [n]        — recent commits\n' +
   '/status         — git status\n' +
-  '/ask <question> — ask Claude about the codebase'
+  '/ask <question> — ask Claude about the codebase\n' +
+  '/clear          — clear chat history\n' +
+  'anything else   — chat with gpt-4o-mini'
 ));
 
 bot.command('todo', async (ctx) => {
@@ -48,6 +51,13 @@ bot.command('ask', async (ctx) => {
   await ctx.reply('Thinking...');
   const result = await handleAsk(question);
   await ctx.reply(result);
+});
+
+bot.command('clear', (ctx) => ctx.reply(clearHistory()));
+
+bot.on('text', async (ctx) => {
+  const reply = await handleChat(ctx.message.text);
+  await ctx.reply(reply);
 });
 
 bot.launch();

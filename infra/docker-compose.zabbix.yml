@@ -10,7 +10,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   zabbix-server:
-    image: zabbix/zabbix-server-pgsql:latest
+    image: zabbix/zabbix-server-pgsql:ubuntu-7.0-latest
     restart: always
     depends_on:
       - postgres
@@ -23,7 +23,7 @@ services:
       - "10051:10051"
 
   zabbix-web:
-    image: zabbix/zabbix-web-apache-pgsql:latest
+    image: zabbix/zabbix-web-apache-pgsql:ubuntu-7.0-latest
     restart: always
     depends_on:
       - zabbix-server
@@ -38,7 +38,7 @@ services:
       - "8080:8080"
 
   zabbix-agent:
-    image: zabbix/zabbix-agent2:latest
+    image: zabbix/zabbix-agent2:ubuntu-7.0-latest
     restart: always
     privileged: true
     pid: host

@@ -17,7 +17,7 @@
 
 - [ ] Add support for more projects in the TODO command
 - [ ] Implement pagination for long TODO files (>3800 chars)
-- [ ] Add /help command with detailed usage instructions
+- [x] Add /help command with detailed usage instructions
 - [ ] Add version command to show bot version
 - [ ] Implement health check endpoint for monitoring
 
@@ -43,6 +43,8 @@
 ## Future Features
 
 - [ ] Add support for code search across repositories
+- [ ] Watch master branch and notify on new commits
+- [ ] Support issue creation through chat (MyDoo is capable of that — see ../MyDoo)
 - [ ] Implement issue tracking integration
 - [ ] Add support for pull request notifications
 - [ ] Implement repository statistics and metrics

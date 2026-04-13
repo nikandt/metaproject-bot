@@ -18,15 +18,18 @@ bot.use((ctx, next) => {
   return next();
 });
 
-bot.start((ctx) => ctx.reply(
+const HELP_TEXT =
   'metaproject bot\n\n' +
   '/todo [project] — show TODO\n' +
   '/log [n]        — recent commits\n' +
   '/status         — git status\n' +
   '/ask <question> — ask Claude about the codebase\n' +
   '/clear          — clear chat history\n' +
-  'anything else   — chat with gpt-4o-mini'
-));
+  '/help           — show this message\n' +
+  'anything else   — chat with gpt-4o-mini';
+
+bot.start((ctx) => ctx.reply(HELP_TEXT));
+bot.help((ctx) => ctx.reply(HELP_TEXT));
 
 bot.command('todo', async (ctx) => {
   const project = ctx.message.text.split(' ').slice(1).join(' ').trim() || null;

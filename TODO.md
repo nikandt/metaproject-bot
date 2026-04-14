@@ -29,5 +29,7 @@
 
 - [x] Deploy on AWS EC2 (Debian) via systemd
 - [x] Zabbix process monitoring (proc.num checks + triggers)
+- [x] EC2 on Tailscale — Zabbix accessible at http://100.71.195.61:8080
+- [ ] Fix Zabbix agent IP after container restart (update host interface in Zabbix UI)
 - [ ] Fix disk usage on EC2 (>90% used, 7.7GB total)
 - [ ] Fix drone-api crash loop (restart counter >100)

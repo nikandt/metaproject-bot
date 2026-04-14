@@ -10,6 +10,7 @@ const SOURCES = {
   kitsat:         ['nikandt', 'metaproject',  'master', 'projects/SLND/kitsat/TODO.md'],
   cansat:         ['nikandt', 'cansat-next',  'main',   'TODO.md'],
   mydoo:          ['nikandt', 'metaproject',  'master', 'projects/SLND/MyDoo/TODO.md'],
+  'bot-inbox':    ['nikandt', 'metaproject-bot', 'master', 'INBOX.md'],
 };
 
 export async function getTodo(project) {

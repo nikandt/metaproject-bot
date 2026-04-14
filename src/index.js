@@ -5,6 +5,7 @@ import { getTodo } from './todo.js';
 import { handleChat, clearHistory } from './chat.js';
 import { startWatcher } from './watcher.js';
 import { createIssue } from './issues.js';
+import { appendNote } from './notes.js';
 import { startWatchdog } from './healthcheck.js';
 import { log, warn, error } from './logger.js';
 
@@ -45,14 +46,16 @@ bot.use((ctx, next) => {
 
 const HELP_TEXT =
   'metaproject bot\n\n' +
-  '/todo [project]        — show TODO\n' +
-  '/log [n]               — recent commits\n' +
-  '/status                — git status\n' +
+  '/todo [project]         — show TODO\n' +
+  '/inbox                  — show inbox\n' +
+  '/log [n]                — recent commits\n' +
+  '/status                 — git status\n' +
   '/issue <title> [| body] — create GitHub issue\n' +
-  '/ask <question>        — ask Claude about the codebase\n' +
-  '/clear                 — clear chat history\n' +
-  '/help                  — show this message\n' +
-  'anything else          — chat with gpt-4o-mini';
+  '/ask <question>         — ask Claude about the codebase\n' +
+  '/clear                  — clear chat history\n' +
+  '/help                   — show this message\n' +
+  'anything else           — chat with gpt-4o-mini\n' +
+  '"add to TODO: X"        — appends X to INBOX.md';
 
 bot.start((ctx) => ctx.reply(HELP_TEXT));
 bot.help((ctx) => ctx.reply(HELP_TEXT));
@@ -77,6 +80,14 @@ bot.command('status', async (ctx) => {
   log(`/status from ${ctx.from.id}`);
   const result = await gitStatus();
   await ctx.reply(result);
+});
+
+bot.command('inbox', async (ctx) => {
+  log(`/inbox from ${ctx.from.id}`);
+  const result = await getTodo('bot-inbox');
+  for (const page of paginate(result)) {
+    await ctx.reply(page, { parse_mode: 'Markdown' });
+  }
 });
 
 bot.command('issue', async (ctx) => {

@@ -14,33 +14,20 @@
 - [x] Implement pagination for long TODO files (>3800 chars)
 - [x] Add /help command with detailed usage instructions
 - [ ] Add version command to show bot version
-- [x] Implement health check endpoint for monitoring (systemd watchdog, to be replaced by Zabbix)
-
-## Low Priority
-
-- [ ] Add unit tests for all command handlers
-- [ ] Add integration tests with mock Telegram API
-- [ ] Implement proper documentation generation
-- [ ] Add CI/CD pipeline for automated testing and deployment
-- [ ] Add support for multiple Claude API models
-- [ ] Implement conversation history for the /ask command
-- [ ] Add support for file attachments in responses
-- [ ] Implement proper error messages for network failures
-
-## Technical Debt
-
-- [ ] Refactor error handling to be more consistent
-- [ ] Add proper TypeScript types instead of JavaScript
-- [ ] Improve code organization and modularity
-- [ ] Add proper input validation for all commands
-- [ ] Implement proper configuration management
+- [x] Implement health check (systemd watchdog — Zabbix monitoring active)
 
 ## Future Features
 
 - [ ] Add support for code search across repositories
 - [x] Watch master branch and notify on new commits
 - [x] Support issue creation through chat (GitHub issues on metaproject)
-- [ ] Implement issue tracking integration
+- [x] Write to INBOX.md via natural language (GPT function calling)
 - [ ] Add support for pull request notifications
 - [ ] Implement repository statistics and metrics
-- [ ] Add support for multiple metaproject repositories
+
+## Infrastructure
+
+- [x] Deploy on AWS EC2 (Debian) via systemd
+- [x] Zabbix process monitoring (proc.num checks + triggers)
+- [ ] Fix disk usage on EC2 (>90% used, 7.7GB total)
+- [ ] Fix drone-api crash loop (restart counter >100)

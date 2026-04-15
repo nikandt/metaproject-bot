@@ -20,3 +20,4 @@
 - [ ] /account/jobs hangs! (2026-04-15)
 - [ ] Barcode isn't valid (2026-04-15)
 - [ ] failed to send 2xx: laskun lähettäjä (2026-04-15)
+- [ ] 10-14 asiakaspalvelu pinot client (2026-04-15)

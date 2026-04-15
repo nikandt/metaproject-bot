@@ -18,3 +18,4 @@
 - [ ] Significant user errors with new users (2026-04-15)
 - [ ] AWS:n opensource mailer cloudflaren työkkäri.fi osoitteen (2026-04-15)
 - [ ] /account/jobs hangs! (2026-04-15)
+- [ ] Barcode isn't valid (2026-04-15)

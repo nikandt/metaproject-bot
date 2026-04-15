@@ -15,3 +15,4 @@
 - [ ] Clean unregistered emails cronjob pinot-client (2026-04-15)
 - [ ] Investigate and fix flashing issue on user homepage. (2026-04-15)
 - [ ] tyokkari.fi redirect (2026-04-15)
+- [ ] Significant user errors with new users (2026-04-15)

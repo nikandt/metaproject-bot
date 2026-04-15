@@ -7,3 +7,4 @@
 - [ ] payTrail integration in pinot-client (2026-04-14)
 - [ ] resolve kitsat cloudflare zabbix trigger bug (2026-04-15)
 - [ ] Remove SITE_URL env var from edge functions. (2026-04-15)
+- [ ] Replace SUPABASE_URL with VITE_SUPABASE_URL (2026-04-15)

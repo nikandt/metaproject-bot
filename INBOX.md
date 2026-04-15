@@ -11,3 +11,4 @@
 - [ ] Audit all Supabase secrets. (2026-04-15)
 - [ ] For Omamaya Stripe, add automatic payment to SLND Stripe. (2026-04-15)
 - [ ] pinot-client password indicator strength unlocalised (2026-04-15)
+- [ ] Fix empty homepage for new user (Commissioner signup). Email: akenrind@gmail.com. (2026-04-15)

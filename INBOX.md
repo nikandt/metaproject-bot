@@ -5,3 +5,4 @@
 - [ ] create a new kubernetes cluster for testing pinot-dev (2026-04-14)
 - [ ] Install Mailtrain on Domainkeskus VPS if possible (2026-04-14)
 - [ ] payTrail integration in pinot-client (2026-04-14)
+- [ ] resolve kitsat cloudflare zabbix trigger bug (2026-04-15)

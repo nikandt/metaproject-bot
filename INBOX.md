@@ -19,3 +19,4 @@
 - [ ] AWS:n opensource mailer cloudflaren työkkäri.fi osoitteen (2026-04-15)
 - [ ] /account/jobs hangs! (2026-04-15)
 - [ ] Barcode isn't valid (2026-04-15)
+- [ ] failed to send 2xx: laskun lähettäjä (2026-04-15)

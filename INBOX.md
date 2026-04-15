@@ -6,3 +6,4 @@
 - [ ] Install Mailtrain on Domainkeskus VPS if possible (2026-04-14)
 - [ ] payTrail integration in pinot-client (2026-04-14)
 - [ ] resolve kitsat cloudflare zabbix trigger bug (2026-04-15)
+- [ ] Remove SITE_URL env var from edge functions. (2026-04-15)

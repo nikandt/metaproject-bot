@@ -13,3 +13,4 @@
 - [ ] pinot-client password indicator strength unlocalised (2026-04-15)
 - [ ] Fix empty homepage for new user (Commissioner signup). Email: akenrind@gmail.com. (2026-04-15)
 - [ ] Clean unregistered emails cronjob pinot-client (2026-04-15)
+- [ ] Investigate and fix flashing issue on user homepage. (2026-04-15)

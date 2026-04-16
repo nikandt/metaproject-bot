@@ -22,3 +22,4 @@
 - [ ] failed to send 2xx: laskun lähettäjä (2026-04-15)
 - [ ] 10-14 asiakaspalvelu pinot client (2026-04-15)
 - [ ] Upload spacelabnextdoor favicon: scp -P 65002 your-favicon.ico u951347197@45.84.206.88:~/public_html/img/favicon.ico (2026-04-16)
+- [ ] download Google takeout data from admin console (2026-04-16)

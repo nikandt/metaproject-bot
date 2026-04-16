@@ -25,6 +25,19 @@
 - [ ] Add support for pull request notifications
 - [ ] Implement repository statistics and metrics
 
+## Email Migration (kitsat.fi + spacelabnextdoor.com)
+
+- [ ] Add forwarding addresses in ImprovMX for kitsat.fi (4 addresses)
+- [ ] Update MX records in Louhi for kitsat.fi (mx1/mx2.improvmx.com)
+- [ ] Add SPF TXT record in Louhi: `v=spf1 include:spf.improvmx.com ~all`
+- [ ] Set up Amazon SES: verify kitsat.fi domain, add DKIM records in Louhi
+- [ ] Create SES SMTP credentials
+- [ ] Configure Gmail "Send mail as" for each kitsat.fi address via SES SMTP
+- [ ] Verify spacelabnextdoor.com is working via Hostinger email + Gmail
+- [ ] Wait for Google Takeout exports to finish (Gmail .mbox + Drive files)
+- [ ] Download and verify Takeout archives before cancelling G Suite
+- [ ] Cancel G Suite (~35 EUR/month saving)
+
 ## Infrastructure
 
 - [x] Deploy on AWS EC2 (Debian) via systemd

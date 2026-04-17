@@ -26,3 +26,4 @@
 - [ ] let developers sign-in with github (2026-04-16)
 - [ ] Create a security guarantee refund calculator in pinot-accounting (2026-04-17)
 - [ ] Always notify about new orders to omamaya and paivi. (2026-04-17)
+- [ ] Let users create their own custom databases in pinot-client partnerships. (2026-04-17)

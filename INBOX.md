@@ -25,3 +25,4 @@
 - [ ] download Google takeout data from admin console (2026-04-16)
 - [ ] let developers sign-in with github (2026-04-16)
 - [ ] Create a security guarantee refund calculator in pinot-accounting (2026-04-17)
+- [ ] Always notify about new orders to omamaya and paivi. (2026-04-17)

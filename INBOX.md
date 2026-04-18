@@ -29,3 +29,4 @@
 - [ ] Let users create their own custom databases in pinot-client partnerships. (2026-04-17)
 - [ ] Research and order optical fibre installation for my lot. (2026-04-18)
 - [ ] Integrate Apache Pinot to pinot-server (2026-04-18)
+- [ ] Create project for free-time activities: n&n intranet (2026-04-18)

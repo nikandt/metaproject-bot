@@ -31,3 +31,4 @@
 - [ ] Integrate Apache Pinot to pinot-server (2026-04-18)
 - [ ] Create project for free-time activities: n&n intranet (2026-04-18)
 - [ ] revert old shop (2026-04-19)
+- [ ] revert omamaya old shop (2026-04-19)

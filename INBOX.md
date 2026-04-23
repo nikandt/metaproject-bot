@@ -32,3 +32,4 @@
 - [ ] Create project for free-time activities: n&n intranet (2026-04-18)
 - [ ] revert old shop (2026-04-19)
 - [ ] revert omamaya old shop (2026-04-19)
+- [ ] Fix kitsat! (2026-04-23)

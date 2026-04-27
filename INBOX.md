@@ -34,3 +34,4 @@
 - [ ] revert omamaya old shop (2026-04-19)
 - [ ] Fix kitsat! (2026-04-23)
 - [ ] Redirect tyokkari domain for domainhotelli.fi (2026-04-25)
+- [ ] Write a short story together. (2026-04-27)

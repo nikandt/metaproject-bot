@@ -37,3 +37,4 @@
 - [ ] Write a short story together. (2026-04-27)
 - [ ] nerot offer round (2026-04-27)
 - [ ] Add team@työkkäri.fi (2026-04-27)
+- [ ] Check pinot-db (2026-05-02)

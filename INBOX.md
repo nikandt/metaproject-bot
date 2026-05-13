@@ -38,3 +38,4 @@
 - [ ] nerot offer round (2026-04-27)
 - [ ] Add team@työkkäri.fi (2026-04-27)
 - [ ] Check pinot-db (2026-05-02)
+- [ ] oikotie-scripts update: search by mh (2026-05-13)

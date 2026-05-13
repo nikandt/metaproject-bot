@@ -39,3 +39,4 @@
 - [ ] Add team@työkkäri.fi (2026-04-27)
 - [ ] Check pinot-db (2026-05-02)
 - [ ] oikotie-scripts update: search by mh (2026-05-13)
+- [ ] Automate offer placement by county (Uusimaa) based on expected return using existing script. (2026-05-13)
